@@ -1,11 +1,10 @@
 package com.example.valorantapp.auth
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.valorantapp.Dashboard
-import com.example.valorantapp.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.valorantapp.databinding.ActivityLoginBinding
+import com.example.valorantapp.view.Dashboard
 
 class Login : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding

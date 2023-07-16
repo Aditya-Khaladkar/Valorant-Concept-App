@@ -4,6 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg"
     tools:context=".view.Dashboard">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/agentPicRecyclerview"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
