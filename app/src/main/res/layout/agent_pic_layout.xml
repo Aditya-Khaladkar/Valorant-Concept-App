@@ -8,18 +8,19 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:src="@drawable/valo_icon"
         app:civ_border_width="3dp"
         app:civ_border_color="@color/app_theme"/>
 
     <TextView
+        android:id="@+id/display_name"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="agent"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:fontFamily="@font/russooneregular"
         android:layout_gravity="center"/>
 

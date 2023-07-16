@@ -1,5 +1,8 @@
 package com.example.valorantapp.model.agent
 
+import com.google.gson.annotations.SerializedName
+
 data class AgentData(
-    val displayIcon: String
+    @SerializedName("displayIcon") val displayIcon: String,
+    @SerializedName("displayName") val displayNames: String
 )
