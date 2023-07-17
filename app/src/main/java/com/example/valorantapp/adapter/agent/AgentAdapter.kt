@@ -1,5 +1,6 @@
 package com.example.valorantapp.adapter.agent
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,5 +34,9 @@ class AgentAdapter(private val list: List<AgentData>) :
             .load(agent.displayIcon)
             .into(holder.profile_image)
         holder.display_name.text = agent.displayNames
+
+       holder.profile_image.setOnClickListener {
+           Log.d("@debug", "onBindViewHolder: $position")
+       }
     }
 }
