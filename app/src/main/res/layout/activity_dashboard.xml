@@ -7,12 +7,14 @@
     android:background="@color/bg"
     tools:context=".view.Dashboard">
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/agentPicRecyclerview">
 
         <TextView
+            android:id="@+id/txtAgentName"
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_height="wrap_content"
@@ -22,16 +24,24 @@
             android:textSize="25sp"
             android:layout_marginTop="20dp" />
 
-        <ImageView
-            android:alpha="0.1"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/dashboard_bg"/>
+            android:layout_height="450dp">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/gekko_bg"/>
+            <ImageView
+                android:id="@+id/imgAgentBg"
+                android:alpha="0.1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/dashboard_bg"/>
+
+            <ImageView
+                android:id="@+id/imgAgentImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/gekko_bg"/>
+
+        </RelativeLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -41,10 +51,9 @@
             android:layout_alignParentBottom="true"
             android:fontFamily="@font/russooneregular"
             android:textColor="@color/white"
-            android:layout_marginBottom="30dp"
             android:textSize="15sp" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/agentPicRecyclerview"

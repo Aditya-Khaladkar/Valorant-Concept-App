@@ -8,6 +8,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.valorantapp.adapter.agent.AgentAdapter
 import com.example.valorantapp.api.AgentApi
+import com.example.valorantapp.api.URL
 import com.example.valorantapp.databinding.ActivityDashboardBinding
 import com.example.valorantapp.model.agent.AgentData
 import com.google.gson.Gson
@@ -26,5 +27,7 @@ class Dashboard : AppCompatActivity() {
         binding.agentPicRecyclerview.setHasFixedSize(true)
 
         AgentApi().fetchAgentList(this, binding)
+
+
     }
 }
