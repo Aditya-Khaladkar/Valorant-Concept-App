@@ -1,11 +1,13 @@
 package com.example.valorantapp.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.valorantapp.R
 import com.example.valorantapp.adapter.agent.AgentAdapter
 import com.example.valorantapp.api.AgentApi
 import com.example.valorantapp.api.URL
@@ -28,6 +30,15 @@ class Dashboard : AppCompatActivity() {
 
         AgentApi().fetchAgentList(this, binding)
 
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.page_maps -> {
+                    startActivity(Intent(applicationContext, WeaponsMaps::class.java))
+                    true
+                }
 
+                else -> false
+            }
+        }
     }
 }
