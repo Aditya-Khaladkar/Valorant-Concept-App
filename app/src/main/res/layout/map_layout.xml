@@ -10,7 +10,8 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:background="@color/bg"
+        android:padding="10dp"
+        android:background="@drawable/map_layout_bg"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
