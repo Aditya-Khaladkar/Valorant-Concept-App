@@ -11,8 +11,9 @@ import com.example.valorantapp.R
 import com.example.valorantapp.adapter.weapon.WeaponAdapter
 import com.example.valorantapp.model.map.MapData
 import com.example.valorantapp.model.weapon.WeaponData
+import kotlin.coroutines.coroutineContext
 
-class MapAdapter(private val list: List<MapData>): RecyclerView.Adapter<MapAdapter.ViewHolder>(){
+class MapAdapter(private var list: List<MapData>): RecyclerView.Adapter<MapAdapter.ViewHolder>(){
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val displayName: TextView = itemView.findViewById(R.id.txtDisplayName)
         val displayIcon: ImageView = itemView.findViewById(R.id.imageView)
@@ -23,6 +24,11 @@ class MapAdapter(private val list: List<MapData>): RecyclerView.Adapter<MapAdapt
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.map_layout, parent, false)
         return ViewHolder(view)
+    }
+
+    fun setFilteredList(mapList: List<MapData>){
+        this.list = mapList
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
