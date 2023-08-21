@@ -12,7 +12,6 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.example.valorantapp.R
-import com.example.valorantapp.api.AgentApi
 import com.example.valorantapp.api.URL
 import com.example.valorantapp.databinding.ActivityDashboardBinding
 import com.example.valorantapp.model.agent.AgentData
@@ -50,11 +49,42 @@ class AgentAdapter(
         holder.profile_image.setOnClickListener {
             Log.d("@debug", "onBindViewHolder: ${agent.uuid}")
 
-            AgentApi().fetchAgentData(
+            fetchAgentData(
                 context,
                 URL.AGENT_DATA_URL + agent.uuid,
                 binding
             )
         }
     }
+
+    private fun fetchAgentData(context: Context, url: String, binding: ActivityDashboardBinding) {
+
+        val queue = Volley.newRequestQueue(context)
+
+        Log.d("@debug", "fetchAgentData: $url")
+
+        val request = JsonObjectRequest(Request.Method.GET, url, null,
+            { response ->
+                // Parse the JSON response using Gson
+                val gson = Gson()
+                val agentData = gson.fromJson(response.getJSONObject("data").toString(), AgentData::class.java)
+
+                binding.txtAgentName.text = agentData.displayNames
+
+                Glide.with(binding.imgAgentImage)
+                    .load(agentData.fullPortrait)
+                    .into(binding.imgAgentImage)
+
+                Glide.with(binding.imgAgentBg)
+                    .load(agentData.background)
+                    .into(binding.imgAgentBg)
+            },
+            { error ->
+                Log.e("UserViewModel", "Error fetching user list: ${error.message}")
+            }
+        )
+
+        queue.add(request)
+    }
+
 }

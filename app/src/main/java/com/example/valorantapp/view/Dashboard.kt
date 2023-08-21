@@ -1,5 +1,6 @@
 package com.example.valorantapp.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +10,6 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.valorantapp.R
 import com.example.valorantapp.adapter.agent.AgentAdapter
-import com.example.valorantapp.api.AgentApi
 import com.example.valorantapp.api.URL
 import com.example.valorantapp.databinding.ActivityDashboardBinding
 import com.example.valorantapp.model.agent.AgentData
@@ -28,7 +28,7 @@ class Dashboard : AppCompatActivity() {
         binding.agentPicRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.agentPicRecyclerview.setHasFixedSize(true)
 
-        AgentApi().fetchAgentList(this, binding)
+        fetchAgentList(this, binding)
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -41,4 +41,23 @@ class Dashboard : AppCompatActivity() {
             }
         }
     }
+
+    private fun fetchAgentList(context: Context, binding: ActivityDashboardBinding) {
+        val queue = Volley.newRequestQueue(context)
+        val url = URL.AGENT_URL
+        val jsonObjectRequest = JsonObjectRequest(
+            Request.Method.GET, url, null,
+            { response ->
+                val gson = Gson()
+                val type = object : TypeToken<List<AgentData>>() {}.type
+                val agentsList = gson.fromJson<List<AgentData>>(response.getJSONArray("data").toString(), type)
+                val agentAdapter = AgentAdapter(binding, context, agentsList)
+                binding.agentPicRecyclerview.adapter = agentAdapter
+            },
+            {
+                // Handle error
+            })
+        queue.add(jsonObjectRequest)
+    }
+
 }
