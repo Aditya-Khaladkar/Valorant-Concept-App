@@ -12,6 +12,8 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class MapApi {
+    lateinit var mapAdapter: MapAdapter
+    var mapList: List<MapData> = mutableListOf()
     fun fetchWeaponList(context: Context, binding: FragmentMapsBinding) {
         val queue = Volley.newRequestQueue(context)
         val url = URL.MAP_URL
@@ -20,8 +22,8 @@ class MapApi {
             { response ->
                 val gson = Gson()
                 val type = object : TypeToken<List<MapData>>() {}.type
-                val mapList = gson.fromJson<List<MapData>>(response.getJSONArray("data").toString(), type)
-                val mapAdapter = MapAdapter(mapList)
+                mapList = gson.fromJson<List<MapData>>(response.getJSONArray("data").toString(), type)
+                mapAdapter = MapAdapter(mapList)
                 binding.mapRecyclerView.adapter = mapAdapter
             },
             {
