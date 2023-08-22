@@ -1,4 +1,4 @@
-package com.example.valorantapp.view
+package com.example.valorantapp.view.ui
 
 import android.content.Context
 import android.os.Bundle

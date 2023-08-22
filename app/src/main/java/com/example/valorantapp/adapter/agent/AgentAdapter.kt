@@ -14,12 +14,13 @@ import com.bumptech.glide.Glide
 import com.example.valorantapp.R
 import com.example.valorantapp.api.URL
 import com.example.valorantapp.databinding.ActivityDashboardBinding
+import com.example.valorantapp.databinding.FragmentHomeBinding
 import com.example.valorantapp.model.agent.AgentData
 import com.google.gson.Gson
 import de.hdodenhof.circleimageview.CircleImageView
 
 class AgentAdapter(
-    private val binding: ActivityDashboardBinding,
+    private val binding: FragmentHomeBinding,
     private val context: Context,
     private val list: List<AgentData>
 ) :
@@ -57,7 +58,7 @@ class AgentAdapter(
         }
     }
 
-    private fun fetchAgentData(context: Context, url: String, binding: ActivityDashboardBinding) {
+    private fun fetchAgentData(context: Context, url: String, binding: FragmentHomeBinding) {
 
         val queue = Volley.newRequestQueue(context)
 

@@ -3,22 +3,22 @@
         android:id="@+id/page_home"
         android:enabled="true"
         android:icon="@drawable/home48px"
-        android:title="Home"/>
+        android:title=""/>
     <item
         android:id="@+id/page_maps"
         android:enabled="true"
         android:icon="@drawable/sports_esports48px"
-        android:title="Weapons and Map"/>
+        android:title=""/>
 
     <item
         android:id="@+id/page_events"
         android:enabled="true"
         android:icon="@drawable/event48px"
-        android:title="Events"/>
+        android:title=""/>
 
     <item
         android:id="@+id/page_profile"
         android:enabled="true"
         android:icon="@drawable/person48px"
-        android:title="Profile"/>
+        android:title=""/>
 </menu>
