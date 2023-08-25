@@ -35,6 +35,10 @@ class HomeFragment : Fragment() {
 
         fetchAgentList(requireContext(), binding)
 
+        binding.txtMoreDetails.setOnClickListener {
+
+        }
+
         return binding.root
     }
 

@@ -50,11 +50,7 @@ class AgentAdapter(
         holder.profile_image.setOnClickListener {
             Log.d("@debug", "onBindViewHolder: ${agent.uuid}")
 
-            fetchAgentData(
-                context,
-                URL.AGENT_DATA_URL + agent.uuid,
-                binding
-            )
+            fetchAgentData(context, URL.AGENT_DATA_URL + agent.uuid, binding)
         }
     }
 

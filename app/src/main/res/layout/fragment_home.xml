@@ -43,6 +43,7 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/txtMoreDetails"
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_height="wrap_content"
