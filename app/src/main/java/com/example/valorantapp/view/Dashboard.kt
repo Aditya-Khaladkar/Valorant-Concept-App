@@ -13,6 +13,7 @@ import com.example.valorantapp.adapter.agent.AgentAdapter
 import com.example.valorantapp.api.URL
 import com.example.valorantapp.databinding.ActivityDashboardBinding
 import com.example.valorantapp.model.agent.AgentData
+import com.example.valorantapp.view.ui.EventsFragment
 import com.example.valorantapp.view.ui.HomeFragment
 import com.example.valorantapp.view.ui.WeaponsMaps
 import com.google.gson.Gson
@@ -37,6 +38,10 @@ class Dashboard : AppCompatActivity() {
                 }
                 R.id.page_maps -> {
                     replaceFragment(WeaponsMaps())
+                    true
+                }
+                R.id.page_events -> {
+                    replaceFragment(EventsFragment())
                     true
                 }
 
