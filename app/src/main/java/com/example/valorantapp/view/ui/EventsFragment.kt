@@ -1,60 +1,65 @@
 package com.example.valorantapp.view.ui
 
+import android.app.DownloadManager.Request
+import android.app.VoiceInteractor
+import android.content.Context
+import android.os.Binder
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.privacysandbox.tools.core.model.Method
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.example.valorantapp.R
+import com.example.valorantapp.adapter.events.EventAdapter
+import com.example.valorantapp.adapter.map.MapAdapter
+import com.example.valorantapp.api.URL
+import com.example.valorantapp.databinding.AgentPicLayoutBinding
+import com.example.valorantapp.databinding.FragmentEvents2Binding
+import com.example.valorantapp.databinding.FragmentMapsBinding
+import com.example.valorantapp.model.event.EventData
+import com.example.valorantapp.model.map.MapData
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [EventsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class EventsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var binding: FragmentEvents2Binding
+    lateinit var eventList: List<EventData>
+    lateinit var eventAdapter: EventAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_events2, container, false)
+    ): View {
+        binding = FragmentEvents2Binding.inflate(layoutInflater,container,false)
+        binding.eventRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        fetchEventList(requireContext(),binding)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EventsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EventsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun fetchEventList(context: Context, binding: FragmentEvents2Binding) {
+        val queue = Volley.newRequestQueue(context)
+        val url = URL.EVENT_URL
+        val jsonObjectRequest = JsonObjectRequest(
+            com.android.volley.Request.Method.GET, url, null,
+            { response ->
+                val gson = Gson()
+                val type = object : TypeToken<List<EventData>>() {}.type
+                eventList =
+                    gson.fromJson<List<EventData>>(response.getJSONArray("data").toString(), type)
+                eventAdapter = EventAdapter(eventList)
+                binding.eventRecyclerView.adapter = eventAdapter
+            },
+            {
+                // Handle error
+            })
+        queue.add(jsonObjectRequest)
     }
+
+
+
 }
