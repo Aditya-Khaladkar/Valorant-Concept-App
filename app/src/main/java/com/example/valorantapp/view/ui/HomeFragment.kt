@@ -2,10 +2,11 @@ package com.example.valorantapp.view.ui
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
@@ -13,15 +14,13 @@ import com.android.volley.toolbox.Volley
 import com.example.valorantapp.R
 import com.example.valorantapp.adapter.agent.AgentAdapter
 import com.example.valorantapp.api.URL
-import com.example.valorantapp.databinding.ActivityDashboardBinding
 import com.example.valorantapp.databinding.FragmentHomeBinding
 import com.example.valorantapp.model.agent.AgentData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class HomeFragment : Fragment() {
-    lateinit var binding: FragmentHomeBinding
-
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +35,7 @@ class HomeFragment : Fragment() {
         fetchAgentList(requireContext(), binding)
 
         binding.txtMoreDetails.setOnClickListener {
-
+            Navigation.findNavController(binding.root).navigate(R.id.action_homeFragment_to_agentDetails)
         }
 
         return binding.root
